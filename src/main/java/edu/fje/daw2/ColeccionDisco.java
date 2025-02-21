@@ -23,16 +23,16 @@ public class ColeccionDisco extends Prestamos implements ControlInventario {
 
     @Override
     public void mostrarInventario() {
-        System.out.println("Disco: " + titulo + ", Formato: " + formato + ", Disponible: " + isDisponible());
-    }
-
-    public int compareTo(ColeccionDisco otroDisco) {
-
-        return this.titulo.compareTo(otroDisco.titulo);
+        System.out.println("Disco: " + titulo + ", Formato: " + formato + ", Duración promedio: " + formato.getDuracion() + " minutos, Disponible: " + isDisponible());
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nFormato: " + formato;
+        return super.toString() + "\nFormato: " + formato + ", Duración promedio: " + formato.getDuracion() + " minutos";
+    }
+
+    // Método para comparar discos por su título
+    public int compareTo(ColeccionDisco otroDisco) {
+        return this.titulo.compareTo(otroDisco.titulo);
     }
 }

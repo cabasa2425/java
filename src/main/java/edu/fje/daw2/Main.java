@@ -13,7 +13,49 @@ public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    static Object[][] clientesExistentes = {
+            {1, "Wilos", "abc@gmail,com", 123 },
+            {1, "Balvan", "abc@gmail,com", 123, "Jesuitas" }
+    };
+
     public static void main(String[] args) {
+
+        ColeccionDisco disco = new ColeccionDisco("flores", FormatoDisco.CD);
+        discos.add(disco);
+
+        Trabajador trabajador = new Trabajador(1, "Ramiro");
+        trabajadores.add(trabajador);
+
+        Libro papel = new Papel("Quijote", "Quijote", "1242455m", 455);
+        Libro audio = new AudioLibro("Los juegos del hambre", "Los juegos del hamrbe", "2345678V", 123);
+        libros.add(papel);
+        libros.add(audio);
+
+        Iterator<Object[]> iter = List.of(clientesExistentes).iterator();
+        while (iter.hasNext()) {
+            Object[] cliente = iter.next();
+            if ( cliente.length <= 4){
+                ClientePrivado privado = new ClientePrivado(
+                        (int) cliente[0],
+                        (String) cliente[1],
+                        (String) cliente[2],
+                        (int) cliente[3]
+                );
+                clientes.add(privado);
+            } else {
+                ClienteEscuela escuela = new ClienteEscuela(
+                        (int) cliente[0],
+                        (String) cliente[1],
+                        (String) cliente[2],
+                        (int) cliente[3],
+                        (String) cliente[4]
+                );
+                clientes.add(escuela);
+            }
+            System.out.println(clientes);
+        }
+
+
         int opcion;
 
         do {
@@ -270,7 +312,12 @@ public class Main {
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
         System.out.print("Formato (CD/Vinilo/Digital): ");
-        String formatoStr = scanner.nextLine();
+        String formatoStr = scanner.nextLine().toUpperCase();
+
+        if (!formatoStr.equals("CD") && !formatoStr.equals("VINILO") && !formatoStr.equals("DIGITAL")) {
+            System.out.println("Formato no válido.");
+            return;
+        }
 
         FormatoDisco formato = FormatoDisco.valueOf(formatoStr);
 
@@ -445,7 +492,7 @@ public class Main {
         Iterator<ColeccionDisco> iterador = discos.iterator();
         while (iterador.hasNext()) {
             ColeccionDisco d = iterador.next();
-            System.out.println(d.getTitulo() + " - " + d.isDisponible());
+            System.out.println(d.getTitulo() + " - " + (d.isDisponible() ? "Disponible" : "No Disponible"));
         }
 
         System.out.print("Título: ");

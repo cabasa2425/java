@@ -53,8 +53,8 @@ public abstract class Prestamos implements PrestacionLibro {
     @Override
     public String toString() {
         return "Título: " + titulo +
-                "\nDisponible: " + disponible +
-                "\nFecha de Préstamo: " + (fechaPrestamo != null ? fechaPrestamo : "No ha sido prestado") +
-                "\nFecha de Devolución: " + (fechaDevolucion != null ? fechaDevolucion : "No devuelto");
+                "\nDisponible: " + disponible
+          /*      "\nFecha de Préstamo: " + (fechaPrestamo != null ? fechaPrestamo : "No ha sido prestado") +
+                "\nFecha de Devolución: " + (fechaDevolucion != null ? fechaDevolucion : "No devuelto") */;
     }
 }

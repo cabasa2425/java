@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class web {
 
-    private static ArrayList<AudioLibro> audiolibros = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static AudioLibro crearAudioLibro(String titulo,String autor,String isbn) {

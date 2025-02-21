@@ -3,7 +3,7 @@
  */
 package edu.fje.daw2;
 
-public class AudioLibro extends Libro {
+public class Audio extends Libro {
 
     /** Duración del audiolibro en minutos */
     private int duracionMinutos;
@@ -15,7 +15,7 @@ public class AudioLibro extends Libro {
      * @param isbn Código ISBN del audiolibro
      * @param duracionMinutos Duración total en minutos
      */
-    public AudioLibro(String titulo, String autor, String isbn, int duracionMinutos) {
+    public Audio(String titulo, String autor, String isbn, int duracionMinutos) {
         super(titulo, autor, isbn);
         this.duracionMinutos = duracionMinutos;
     }

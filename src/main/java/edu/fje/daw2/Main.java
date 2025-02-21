@@ -5,6 +5,17 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Iterator;
 
+/**
+ * Clase principal que contiene el flujo principal de la aplicación de la biblioteca.
+ *
+ * Gestiona clientes, libros, discos y trabajadores.
+ * Proporciona un menú para crear, modificar, eliminar y buscar clientes, libros, discos y trabajadores.
+ *
+ * @see Cliente para la clase que representa a un cliente.
+ * @see Libro para la clase que representa a un libro.
+ * @see ColeccionDisco para la clase que representa una colección de discos.
+ * @see Trabajador para la clase que representa a un trabajador.
+ */
 public class Main {
     private static List<Cliente> clientes = new ArrayList<>();
     private static List<Libro> libros = new ArrayList<>();
@@ -18,8 +29,16 @@ public class Main {
             {1, "Balvan", "abc@gmail,com", 123, "Jesuitas" }
     };
 
+    /**
+     * Método principal que inicia la ejecución del programa y muestra el menú principal.
+     *
+     * Inicializa las colecciones de discos, libros y trabajadores, y los agrega a sus respectivas listas.
+     * Luego, se muestra un menú para interactuar con las distintas opciones de la biblioteca.
+     *
+     * @param args Los argumentos de la línea de comandos (no utilizados en este caso).
+     */
     public static void main(String[] args) {
-
+        // Inicialización de discos, trabajadores y libros
         ColeccionDisco disco = new ColeccionDisco("flores", FormatoDisco.CD);
         discos.add(disco);
 
@@ -31,6 +50,7 @@ public class Main {
         libros.add(papel);
         libros.add(audio);
 
+        // Crear clientes a partir de la lista de clientes existentes
         Iterator<Object[]> iter = List.of(clientesExistentes).iterator();
         while (iter.hasNext()) {
             Object[] cliente = iter.next();
@@ -52,12 +72,10 @@ public class Main {
                 );
                 clientes.add(escuela);
             }
-            //System.out.println(clientes);
         }
 
-
+        // Menú principal
         int opcion;
-
         do {
             System.out.println("\n📚 MENU BIBLIOTECA 📚");
             System.out.println("1. Crear");
@@ -81,6 +99,15 @@ public class Main {
             }
         } while (opcion != 0);
     }
+    /**
+     * Muestra el menú para crear nuevos elementos como clientes, libros, discos y trabajadores.
+     * Permite seleccionar la opción para crear cada tipo de objeto.
+     *
+     * @see crearCliente() para crear un cliente.
+     * @see crearLibro() para crear un libro.
+     * @see crearDisco() para crear una colección de discos.
+     * @see crearTrabajador() para crear un trabajador.
+     */
     private static void menuCrear() {
         int opcion;
         do {
@@ -104,6 +131,17 @@ public class Main {
             }
         } while (opcion != 0);
     }
+
+    /**
+     * Muestra el menú para gestionar las prestaciones como préstamos y devoluciones de libros y discos.
+     * Permite seleccionar la opción para prestar/devolver libros o discos.
+     *
+     * @see prestarLibro() para prestar un libro a un cliente privado.
+     * @see devolverLibro() para devolver un libro.
+     * @see pedirDisco() para pedir una colección de discos a un cliente escuela.
+     * @see devolverDisco() para devolver una colección de discos.
+     * @see mostrarTodosLosPrestamos() para ver todos los préstamos realizados.
+     */
     private static void menuPrestacion() {
         int opcion;
         do {
@@ -130,6 +168,15 @@ public class Main {
         } while (opcion != 0);
     }
 
+    /**
+     * Muestra el menú para eliminar elementos como clientes, libros, discos y trabajadores.
+     * Permite seleccionar la opción para eliminar cada tipo de objeto.
+     *
+     * @see eliminarCliente() para eliminar un cliente.
+     * @see eliminarLibro() para eliminar un libro.
+     * @see eliminarDisco() para eliminar una colección de discos.
+     * @see eliminarTrabajador() para eliminar un trabajador.
+     */
     private static void menuEliminar() {
         int opcion;
         do {
@@ -154,6 +201,13 @@ public class Main {
         } while (opcion != 0);
     }
 
+    /**
+     * Muestra el menú para modificar elementos como clientes, libros y discos.
+     * Permite seleccionar la opción para modificar un cliente o un producto (libro o disco).
+     *
+     * @see modificarCliente() para modificar un cliente.
+     * @see modificarProducto() para modificar un libro o una colección de discos.
+     */
     private static void menuModificar() {
         int opcion;
         do {
@@ -174,6 +228,15 @@ public class Main {
         } while (opcion != 0);
     }
 
+    /**
+     * Muestra el menú para buscar elementos como clientes, libros, discos y trabajadores.
+     * Permite seleccionar la opción para buscar cada tipo de objeto.
+     *
+     * @see buscarCliente() para buscar un cliente.
+     * @see buscarLibro() para buscar un libro.
+     * @see buscarDisco() para buscar una colección de discos.
+     * @see buscarTrabajador() para buscar un trabajador.
+     */
     private static void menuBuscar() {
         int opcion;
         do {
@@ -199,6 +262,13 @@ public class Main {
     }
 
 
+
+    /**
+     * Permite a un trabajador recibir la devolución de una colección de discos de un cliente de tipo escuela.
+     * Muestra los discos disponibles y los compara alfabéticamente con el disco seleccionado.
+     *
+     * @throws {NullPointerException} Si no se encuentra el trabajador, cliente o disco seleccionado.
+     */
     private static void devolverDisco() {
         System.out.println("\n🔄 Devolver Colección de Discos:");
 
@@ -227,9 +297,10 @@ public class Main {
         trabajador.recibirDevolucion(cliente, null, disco);
     }
 
-
-
-
+    /**
+     * Crea un nuevo trabajador y lo agrega a la lista de trabajadores.
+     * Solicita el ID y nombre del trabajador y lo registra en la colección correspondiente.
+     */
     private static void crearTrabajador() {
         System.out.println("\n🛠️ Crear Trabajador:");
         System.out.print("ID Trabajador: ");
@@ -241,6 +312,10 @@ public class Main {
         System.out.println("✅ Trabajador creado con éxito.");
     }
 
+    /**
+     * Crea un nuevo cliente, que puede ser de tipo privado o escuela, y lo agrega a la lista de clientes.
+     * Solicita los datos necesarios como el ID, nombre, correo y teléfono.
+     */
     private static void crearCliente() {
         System.out.println("\n👤 Crear Cliente:");
         System.out.print("ID Cliente: ");
@@ -270,6 +345,10 @@ public class Main {
         }
     }
 
+    /**
+     * Crea un nuevo libro, que puede ser de tipo papel o audiolibro, y lo agrega a la lista de libros.
+     * Solicita los datos necesarios como el título, autor, ISBN, y tipo de libro.
+     */
     private static void crearLibro() {
         System.out.println("\n📖 Crear Libro:");
         System.out.print("Título: ");
@@ -307,6 +386,10 @@ public class Main {
         }
     }
 
+    /**
+     * Crea una nueva colección de discos y la agrega a la lista de discos.
+     * Solicita los datos necesarios como el título y formato de la colección de discos.
+     */
     private static void crearDisco() {
         System.out.println("\n💿 Crear Colección de Discos:");
         System.out.print("Título: ");
@@ -330,6 +413,10 @@ public class Main {
         System.out.println("✅ Colección de Discos creada con éxito.");
     }
 
+    /**
+     * Permite a un trabajador prestar un libro a un cliente de tipo privado.
+     * Solicita la selección del trabajador, cliente y libro antes de realizar el préstamo.
+     */
     private static void prestarLibro() {
         System.out.println("\n Prestar Libro:");
         Trabajador trabajador = seleccionarTrabajador();
@@ -344,6 +431,10 @@ public class Main {
         trabajador.prestar(cliente, libro, null);
     }
 
+    /**
+     * Permite a un trabajador recibir la devolución de un libro de un cliente de tipo privado.
+     * Solicita la selección del trabajador, cliente y libro antes de realizar la devolución.
+     */
     private static void devolverLibro() {
         System.out.println("\n Devolver Libro:");
         Trabajador trabajador = seleccionarTrabajador();
@@ -358,6 +449,13 @@ public class Main {
         trabajador.recibirDevolucion(cliente, libro, null);
     }
 
+
+    /**
+     * Selecciona un cliente privado de la lista de clientes.
+     * Muestra un listado de los clientes privados disponibles y permite seleccionar uno por su ID.
+     *
+     * @returns {Cliente} El cliente privado seleccionado o null si no se encuentra.
+     */
     private static Cliente seleccionarClientePrivado() {
         System.out.println("\n Listado de Clientes:");
 
@@ -385,7 +483,12 @@ public class Main {
         return null;
     }
 
-
+    /**
+     * Selecciona un libro de la lista de libros.
+     * Muestra los libros disponibles y permite seleccionar uno por su título.
+     *
+     * @returns {Libro} El libro seleccionado o null si no se encuentra.
+     */
     private static Libro seleccionarLibro() {
         System.out.println("\n📚 Selecciona un Libro:");
 
@@ -415,8 +518,12 @@ public class Main {
         return null;
     }
 
-
-
+    /**
+     * Permite a un trabajador prestar una colección de discos a un cliente de tipo escuela.
+     * Primero selecciona al trabajador, luego al cliente y finalmente la colección de discos.
+     *
+     * @throws {NullPointerException} Si no se encuentra el trabajador, cliente o disco seleccionado.
+     */
     private static void pedirDisco() {
         System.out.println("\n🎵 Pedir Colección de Discos:");
         Trabajador trabajador = seleccionarTrabajador();
@@ -431,7 +538,12 @@ public class Main {
         trabajador.prestar(cliente, null, disco);
     }
 
-
+    /**
+     * Selecciona un trabajador de la lista de trabajadores.
+     * Muestra una lista de trabajadores y permite seleccionar uno por su ID.
+     *
+     * @returns {Trabajador} El trabajador seleccionado o null si no se encuentra.
+     */
     private static Trabajador seleccionarTrabajador() {
         System.out.println("Seleccione un Trabajador:");
 
@@ -457,7 +569,12 @@ public class Main {
         return null;
     }
 
-
+    /**
+     * Selecciona un cliente de tipo escuela de la lista de clientes.
+     * Muestra los clientes de tipo escuela y permite seleccionar uno por su ID.
+     *
+     * @returns {Cliente} El cliente de tipo escuela seleccionado o null si no se encuentra.
+     */
     private static Cliente seleccionarClienteEscuela() {
         System.out.println("Seleccione un Cliente Escuela:");
 
@@ -485,7 +602,12 @@ public class Main {
         return null;
     }
 
-
+    /**
+     * Selecciona una colección de discos de la lista de discos.
+     * Muestra las colecciones de discos disponibles y permite seleccionar una por su título.
+     *
+     * @returns {ColeccionDisco} La colección de discos seleccionada o null si no se encuentra.
+     */
     private static ColeccionDisco seleccionarDisco() {
         System.out.println("Seleccione una Colección de Discos:");
 
@@ -511,8 +633,16 @@ public class Main {
     }
 
 
+
     // MMODIFICAR -------------------------------
 
+    /**
+     * Modifica los datos de un cliente según su tipo (Privado o Escuela).
+     * Permite cambiar el nombre, correo y teléfono de un cliente.
+     *
+     * @throws java.util.InputMismatchException Si se ingresa un valor no válido para el teléfono.
+     * @throws java.lang.NullPointerException Si no se encuentra el cliente seleccionado.
+     */
     private static void modificarCliente() {
         System.out.println("\n✏️ Modificar Cliente: (1) Privado - (2) Escuela");
         int tipo = scanner.nextInt();
@@ -541,6 +671,13 @@ public class Main {
         System.out.println("✅ Cliente actualizado.");
     }
 
+    /**
+     * Modifica los datos de un producto, que puede ser un libro o una colección de discos.
+     * Si el tipo es 1, se modifica un libro, si es 2, se modifica una colección de discos.
+     *
+     * @throws java.util.InputMismatchException Si el tipo de producto o la opción ingresada no es válida.
+     * @throws java.lang.NullPointerException Si no se encuentra el producto seleccionado.
+     */
     private static void modificarProducto() {
         System.out.println("\nModificar Producto: (1) Libro - (2) Colección de Disco");
         int tipo = scanner.nextInt();
@@ -569,11 +706,7 @@ public class Main {
                 if (!nuevoIsbn.isEmpty()) libro.setIsbn(nuevoIsbn);
 
                 System.out.println("Libro actualizado: " + libro.toString());
-                System.out.println("\n\n-----------------\n");
-
                 libro.actualizarInventario();
-
-
             } else if (opcion == 2) {
                 System.out.println("Modificar audio libro...");
                 Audio audioLibro = (Audio) seleccionarLibro();
@@ -597,12 +730,8 @@ public class Main {
                 audioLibro.setDuracionMinutos(nuevaDuracion);
 
                 System.out.println("Audio libro actualizado: " + audioLibro.toString());
-
-                System.out.println("\n\n-----------------\n");
-
                 audioLibro.actualizarInventario();
             }
-
         } else if (tipo == 2) {
             System.out.println("Modificar colección de disco...");
             ColeccionDisco coleccionDisco = seleccionarDisco();
@@ -630,11 +759,17 @@ public class Main {
             }
 
             coleccionDisco.setFormato(nuevoFormato);
-
             System.out.println("Colección de disco actualizada: " + coleccionDisco.toString());
         }
     }
 
+    /**
+     * Modifica los datos de un trabajador.
+     * Permite cambiar el nombre y el ID del trabajador.
+     *
+     * @throws java.util.InputMismatchException Si el ID ingresado no es válido.
+     * @throws java.lang.NullPointerException Si no se encuentra el trabajador seleccionado.
+     */
     private static void modificarTrabajador() {
         System.out.println("\n✏️ Modificar Trabajador:");
 
@@ -655,8 +790,12 @@ public class Main {
         System.out.println("✅ Trabajador actualizado: " + trabajador.getNombre() + " (ID: " + trabajador.getId() + ")");
     }
 
+
 // BUSCAR INDIVIDUALMENTE ---------------
 
+    /**
+     * Busca un libro en la biblioteca por título o autor.
+     */
     private static void buscarLibro() {
         System.out.println("\n🔍 Buscar Libro:");
 
@@ -706,13 +845,13 @@ public class Main {
         }
     }
 
-
+    /**
+     * Busca un cliente por nombre o correo electrónico.
+     */
     private static void buscarCliente() {
         System.out.println("\n🔍 Buscar Cliente:");
 
         System.out.println("¿Cómo quieres buscar al cliente?");
-        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━");
-        System.out.println("📌 Dejar el campo vacío mostrará **todos los clientes**.");
         System.out.println("1. Por Nombre");
         System.out.println("2. Por Correo Electrónico");
         System.out.print("Selecciona una opción: ");
@@ -758,7 +897,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * Busca un trabajador por ID o nombre.
+     */
     private static void buscarTrabajador() {
         System.out.println("\n🔍 Buscar Trabajador:");
 
@@ -810,6 +951,13 @@ public class Main {
     }
 
 
+    /**
+     * Método estático para buscar colecciones de discos.
+     * Permite buscar por título o por formato (CD, VINILO, DIGITAL).
+     *
+     * @throws java.util.InputMismatchException Si el valor ingresado no es un número entero.
+     * @throws java.lang.NullPointerException Si no se encuentran colecciones de discos.
+     */
     private static void buscarDisco() {
         System.out.println("\n🔍 Buscar Colección de Discos:");
 
@@ -860,10 +1008,13 @@ public class Main {
     }
 
 
+
     // Eliminacion -----------------------
 
+    /**
+     * Elimina un cliente privado de la lista de clientes.
+     */
     private static void eliminarCliente() {
-
         Cliente cliente = seleccionarClientePrivado();
         if (cliente != null) {
             clientes.remove(cliente);
@@ -873,6 +1024,9 @@ public class Main {
         }
     }
 
+    /**
+     * Elimina un libro de la lista de libros.
+     */
     private static void eliminarLibro() {
         Libro libro = seleccionarLibro();
         if (libro != null) {
@@ -883,6 +1037,9 @@ public class Main {
         }
     }
 
+    /**
+     * Elimina una colección de discos de la lista de discos.
+     */
     private static void eliminarDisco() {
         ColeccionDisco disco = seleccionarDisco();
         if (disco != null) {
@@ -893,8 +1050,10 @@ public class Main {
         }
     }
 
+    /**
+     * Elimina un trabajador de la lista de trabajadores.
+     */
     private static void eliminarTrabajador() {
-
         Trabajador trabajador = seleccionarTrabajador();
         if (trabajador != null) {
             trabajadores.remove(trabajador);
@@ -904,6 +1063,9 @@ public class Main {
         }
     }
 
+    /**
+     * Muestra todos los préstamos realizados por los trabajadores.
+     */
     private static void mostrarTodosLosPrestamos() {
         Iterator<Trabajador> iterador = trabajadores.iterator();
         while (iterador.hasNext()) {

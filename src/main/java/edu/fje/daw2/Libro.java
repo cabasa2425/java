@@ -1,6 +1,6 @@
 package edu.fje.daw2;
 
-public abstract class Libro extends Prestamos implements ControlInventario {
+public abstract class Libro extends Prestamos {
     protected String autor;
     protected String isbn;
 

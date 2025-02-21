@@ -1,6 +1,6 @@
 package edu.fje.daw2;
 
-public class ColeccionDisco extends Prestamos implements ControlInventario {
+public class ColeccionDisco extends Prestamos {
     private FormatoDisco formato;
 
     public ColeccionDisco(String titulo, FormatoDisco formato) {
@@ -31,7 +31,6 @@ public class ColeccionDisco extends Prestamos implements ControlInventario {
         return super.toString() + "\nFormato: " + formato + ", Duración promedio: " + formato.getDuracion() + " minutos";
     }
 
-    // Método para comparar discos por su título
     public int compareTo(ColeccionDisco otroDisco) {
         return this.titulo.compareTo(otroDisco.titulo);
     }

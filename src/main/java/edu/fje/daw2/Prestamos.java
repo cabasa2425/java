@@ -2,7 +2,7 @@ package edu.fje.daw2;
 
 import java.time.LocalDate;
 
-public abstract class Prestamos implements PrestacionLibro {
+public abstract class Prestamos implements PrestacionLibro, ControlInventario {
     protected String titulo;
     protected boolean disponible;
     protected LocalDate fechaPrestamo;
@@ -32,6 +32,16 @@ public abstract class Prestamos implements PrestacionLibro {
     @Override
     public boolean isDisponible() {
         return disponible;
+    }
+
+    @Override
+    public void actualizarInventario() {
+        System.out.println("Inventario actualizado para el producto: " + titulo);
+    }
+
+    @Override
+    public void mostrarInventario() {
+        System.out.println("Producto: " + titulo + ", Disponible: " + isDisponible());
     }
 
     public LocalDate getFechaPrestamo() {

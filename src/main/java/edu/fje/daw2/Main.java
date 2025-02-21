@@ -52,7 +52,7 @@ public class Main {
                 );
                 clientes.add(escuela);
             }
-            System.out.println(clientes);
+            //System.out.println(clientes);
         }
 
 
@@ -711,6 +711,8 @@ public class Main {
         System.out.println("\n🔍 Buscar Cliente:");
 
         System.out.println("¿Cómo quieres buscar al cliente?");
+        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━");
+        System.out.println("📌 Dejar el campo vacío mostrará **todos los clientes**.");
         System.out.println("1. Por Nombre");
         System.out.println("2. Por Correo Electrónico");
         System.out.print("Selecciona una opción: ");

@@ -1,44 +1,47 @@
-/**
- * Representa un préstamo realizado por un cliente en la biblioteca.
- * Contiene información sobre el cliente, el producto prestado y las fechas de préstamo y devolución.
- */
 package edu.fje.daw2;
 
 import java.time.LocalDate;
 
+/**
+ * Representa un préstamo realizado por un cliente en la biblioteca.
+ * Contiene información sobre el cliente, el producto prestado y las fechas de préstamo y devolución.
+ * Un préstamo se crea con una fecha de inicio y una fecha de devolución prevista de una semana después.
+ */
 public class Prestamo {
 
-    /** Cliente que realiza el préstamo */
+    /** Cliente que realiza el préstamo. */
     private Cliente cliente;
 
-    /** Producto prestado (puede ser un libro o disco) */
+    /** Producto prestado, que puede ser un libro o un disco. */
     private Object producto;
 
-    /** Fecha en la que se realizó el préstamo */
+    /** Fecha en la que se realizó el préstamo. */
     private LocalDate fechaInicio;
 
-    /** Fecha prevista para la devolución del producto */
+    /** Fecha prevista para la devolución del producto. */
     private LocalDate fechaDevolucionPrevista;
 
-    /** Fecha real en la que se devolvió el producto (puede ser null si no ha sido devuelto) */
+    /** Fecha real en la que se devolvió el producto, o {@code null} si aún no ha sido devuelto. */
     private LocalDate fechaDevolucionReal;
 
     /**
      * Constructor de la clase Prestamo.
-     * @param cliente Cliente que realiza el préstamo
-     * @param producto Producto prestado
+     * Crea un nuevo préstamo con la fecha de inicio actual y una fecha de devolución prevista de una semana.
+     *
+     * @param cliente Cliente que realiza el préstamo.
+     * @param producto Producto prestado (puede ser un libro o un disco).
      */
     public Prestamo(Cliente cliente, Object producto) {
         this.cliente = cliente;
         this.producto = producto;
         this.fechaInicio = LocalDate.now();
-        this.fechaDevolucionPrevista = LocalDate.now().plusWeeks(1);
+        this.fechaDevolucionPrevista = fechaInicio.plusWeeks(1);
         this.fechaDevolucionReal = null;
     }
 
     /**
      * Obtiene el cliente que realizó el préstamo.
-     * @return Cliente del préstamo
+     * @return Cliente que realizó el préstamo.
      */
     public Cliente getCliente() {
         return cliente;
@@ -46,7 +49,7 @@ public class Prestamo {
 
     /**
      * Obtiene el producto prestado.
-     * @return Producto prestado
+     * @return Producto prestado (libro o disco).
      */
     public Object getProducto() {
         return producto;
@@ -54,7 +57,7 @@ public class Prestamo {
 
     /**
      * Obtiene la fecha de inicio del préstamo.
-     * @return Fecha de inicio del préstamo
+     * @return Fecha de inicio del préstamo.
      */
     public LocalDate getFechaInicio() {
         return fechaInicio;
@@ -62,7 +65,7 @@ public class Prestamo {
 
     /**
      * Obtiene la fecha prevista para la devolución del producto.
-     * @return Fecha de devolución prevista
+     * @return Fecha prevista de devolución.
      */
     public LocalDate getFechaDevolucionPrevista() {
         return fechaDevolucionPrevista;
@@ -70,7 +73,7 @@ public class Prestamo {
 
     /**
      * Obtiene la fecha real de devolución del producto.
-     * @return Fecha de devolución real, o null si aún no ha sido devuelto
+     * @return Fecha de devolución real o {@code null} si aún no ha sido devuelto.
      */
     public LocalDate getFechaDevolucionReal() {
         return fechaDevolucionReal;
@@ -78,19 +81,20 @@ public class Prestamo {
 
     /**
      * Marca el producto como devuelto si aún no ha sido devuelto previamente.
+     * Si ya ha sido devuelto, muestra un mensaje indicando que la devolución ya se realizó.
      */
     public void devolver() {
         if (fechaDevolucionReal == null) {
-            this.fechaDevolucionReal = LocalDate.now();
+            fechaDevolucionReal = LocalDate.now();
             System.out.println("El producto ha sido devuelto.");
         } else {
-            System.out.println("El producto ya ha sido devuelto.");
+            System.out.println("El producto ya ha sido devuelto anteriormente.");
         }
     }
 
     /**
      * Representación en cadena del objeto Prestamo.
-     * @return Información del préstamo en formato String
+     * @return Información del préstamo en formato String.
      */
     @Override
     public String toString() {

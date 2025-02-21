@@ -1,28 +1,29 @@
-/**
- * Representa un préstamo realizado por un cliente en la biblioteca.
- * Contiene información sobre el cliente, el producto prestado y las fechas de préstamo y devolución.
- */
 package edu.fje.daw2;
 
 import java.time.LocalDate;
 
+/**
+ * Representa un préstamo realizado por un cliente en la biblioteca.
+ * Contiene información sobre el producto prestado, su disponibilidad y las fechas de préstamo y devolución.
+ */
 public abstract class Prestamos implements PrestacionLibro {
 
-    /** Título del préstamo */
+    /** Título del producto prestado. */
     protected String titulo;
 
-    /** Indica si el producto está disponible para préstamo */
+    /** Indica si el producto está disponible para préstamo. */
     protected boolean disponible;
 
-    /** Fecha en la que se realizó el préstamo */
+    /** Fecha en la que se realizó el préstamo, null si aún no se ha prestado. */
     protected LocalDate fechaPrestamo;
 
-    /** Fecha en la que se devolvió el producto */
+    /** Fecha en la que se devolvió el producto, null si aún no se ha devuelto. */
     protected LocalDate fechaDevolucion;
 
     /**
      * Constructor de la clase Prestamos.
-     * @param titulo Título del producto prestado
+     * Inicializa el título y establece el producto como disponible.
+     * @param titulo Título del producto prestado.
      */
     public Prestamos(String titulo) {
         this.titulo = titulo;
@@ -31,7 +32,7 @@ public abstract class Prestamos implements PrestacionLibro {
 
     /**
      * Intenta prestar el producto si está disponible.
-     * @return true si el préstamo es exitoso, false en caso contrario
+     * @return {@code true} si el préstamo es exitoso, {@code false} si ya está prestado.
      */
     @Override
     public boolean prestar() {
@@ -44,7 +45,7 @@ public abstract class Prestamos implements PrestacionLibro {
     }
 
     /**
-     * Devuelve el producto y lo marca como disponible nuevamente.
+     * Devuelve el producto, lo marca como disponible y registra la fecha de devolución.
      */
     @Override
     public void devolver() {
@@ -54,7 +55,7 @@ public abstract class Prestamos implements PrestacionLibro {
 
     /**
      * Verifica si el producto está disponible para préstamo.
-     * @return true si está disponible, false si está prestado
+     * @return {@code true} si está disponible, {@code false} si está prestado.
      */
     @Override
     public boolean isDisponible() {
@@ -63,7 +64,7 @@ public abstract class Prestamos implements PrestacionLibro {
 
     /**
      * Obtiene la fecha en la que se realizó el préstamo.
-     * @return Fecha de préstamo
+     * @return La fecha de préstamo o {@code null} si aún no ha sido prestado.
      */
     public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
@@ -71,23 +72,23 @@ public abstract class Prestamos implements PrestacionLibro {
 
     /**
      * Obtiene la fecha de devolución del producto.
-     * @return Fecha de devolución
+     * @return La fecha de devolución o {@code null} si aún no ha sido devuelto.
      */
     public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
     /**
-     * Obtiene el título del préstamo.
-     * @return Título del producto prestado
+     * Obtiene el título del producto prestado.
+     * @return El título del producto prestado.
      */
     public String getTitulo() {
         return titulo;
     }
 
     /**
-     * Establece un nuevo título para el préstamo.
-     * @param titulo Nuevo título del producto prestado
+     * Establece un nuevo título para el producto prestado.
+     * @param titulo El nuevo título del producto prestado.
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -95,13 +96,13 @@ public abstract class Prestamos implements PrestacionLibro {
 
     /**
      * Representación en cadena del objeto Prestamos.
-     * @return Información del préstamo en formato String
+     * @return Información del préstamo en formato de texto.
      */
     @Override
     public String toString() {
         return "Título: " + titulo +
-                "\nDisponible: " + disponible
-          /*      "\nFecha de Préstamo: " + (fechaPrestamo != null ? fechaPrestamo : "No ha sido prestado") +
-                "\nFecha de Devolución: " + (fechaDevolucion != null ? fechaDevolucion : "No devuelto") */;
+                "\nDisponible: " + disponible +
+                "\nFecha de Préstamo: " + (fechaPrestamo != null ? fechaPrestamo : "No ha sido prestado") +
+                "\nFecha de Devolución: " + (fechaDevolucion != null ? fechaDevolucion : "No devuelto");
     }
 }

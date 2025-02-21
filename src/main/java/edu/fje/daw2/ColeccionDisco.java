@@ -4,7 +4,7 @@ package edu.fje.daw2;
  * Representa una colección de discos que puede ser prestada e inventariada.
  * Extiende la clase Prestamos e implementa ControlInventario.
  */
-public class ColeccionDisco extends Prestamos implements ControlInventario {
+public class ColeccionDisco extends Prestamo implements ControlInventario {
 
     /** Formato del disco (CD, VINILO, DIGITAL). */
     private FormatoDisco formato;

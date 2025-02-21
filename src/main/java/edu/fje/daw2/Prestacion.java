@@ -3,7 +3,7 @@
  */
 package edu.fje.daw2;
 
-public interface PrestacionLibro {
+public interface Prestacion {
 
     /**
      * Intenta prestar un libro.

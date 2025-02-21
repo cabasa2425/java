@@ -27,7 +27,7 @@ public class Main {
         trabajadores.add(trabajador);
 
         Libro papel = new Papel("Quijote", "Quijote", "1242455m", 455);
-        Libro audio = new AudioLibro("Los juegos del hambre", "Los juegos del hamrbe", "2345678V", 123);
+        Libro audio = new Audio("Los juegos del hambre", "Los juegos del hamrbe", "2345678V", 123);
         libros.add(papel);
         libros.add(audio);
 
@@ -576,7 +576,7 @@ public class Main {
 
             } else if (opcion == 2) {
                 System.out.println("Modificar audio libro...");
-                AudioLibro audioLibro = (AudioLibro) seleccionarLibro();
+                Audio audioLibro = (Audio) seleccionarLibro();
                 if (audioLibro == null) return;
 
                 System.out.print("Nuevo Título (" + audioLibro.getTitulo() + "): ");

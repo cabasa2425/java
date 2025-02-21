@@ -6,7 +6,7 @@ import java.util.List;
 public class Trabajador {
     private int id;
     private String nombre;
-    private List<Prestamo> prestamosRealizados;
+    private List<DetallesPrestamo> prestamosRealizados;
 
     public Trabajador(int id, String nombre) {
         this.id = id;
@@ -33,19 +33,19 @@ public class Trabajador {
     public void prestar(Cliente cliente, Libro libro, ColeccionDisco disco) {
         if (cliente instanceof ClientePrivado) {
             if (libro != null && libro.prestar()) {
-                Prestamo prestamo = new Prestamo(cliente, libro);
-                prestamosRealizados.add(prestamo);
-                cliente.agregarPrestamo(prestamo);
-                System.out.println("El libro ha sido prestado a " + cliente.getNombre() + "hasta el" + prestamo.getFechaDevolucionPrevista());
+                DetallesPrestamo detallesPrestamo = new DetallesPrestamo(cliente, libro);
+                prestamosRealizados.add(detallesPrestamo);
+                cliente.agregarPrestamo(detallesPrestamo);
+                System.out.println("El libro ha sido prestado a " + cliente.getNombre() + "hasta el" + detallesPrestamo.getFechaDevolucionPrevista());
             } else {
                 System.out.println("El libro no está disponible para préstamo.");
             }
         } else if (cliente instanceof ClienteEscuela) {
             if (disco != null && disco.prestar()) {
-                Prestamo prestamo = new Prestamo(cliente, disco);
-                prestamosRealizados.add(prestamo);
-                cliente.agregarPrestamo(prestamo);
-                System.out.println("La colección de discos ha sido prestada a " + cliente.getNombre() + "hasta el" + prestamo.getFechaDevolucionPrevista());
+                DetallesPrestamo detallesPrestamo = new DetallesPrestamo(cliente, disco);
+                prestamosRealizados.add(detallesPrestamo);
+                cliente.agregarPrestamo(detallesPrestamo);
+                System.out.println("La colección de discos ha sido prestada a " + cliente.getNombre() + "hasta el" + detallesPrestamo.getFechaDevolucionPrevista());
             } else {
                 System.out.println("La colección de discos no está disponible para préstamo.");
             }
@@ -58,16 +58,16 @@ public class Trabajador {
         if (cliente instanceof ClientePrivado) {
             if (libro != null && !libro.isDisponible()) {
                 libro.devolver();
-                Prestamo prestamo = null;
-                for (Prestamo p : cliente.getPrestamosRealizados()) {
+                DetallesPrestamo detallesPrestamo = null;
+                for (DetallesPrestamo p : cliente.getPrestamosRealizados()) {
                     if (p.getProducto() == libro) {
-                        prestamo = p;
+                        detallesPrestamo = p;
                         break;
                     }
                 }
-                if (prestamo != null) {
-                    prestamo.devolver();
-                    cliente.getPrestamosRealizados().remove(prestamo);
+                if (detallesPrestamo != null) {
+                    detallesPrestamo.devolver();
+                    cliente.getPrestamosRealizados().remove(detallesPrestamo);
                     System.out.println("El libro ha sido devuelto por " + cliente.getNombre());
                 }
             } else {
@@ -76,16 +76,16 @@ public class Trabajador {
         } else if (cliente instanceof ClienteEscuela) {
             if (disco != null && !disco.isDisponible()) {
                 disco.devolver();
-                Prestamo prestamo = null;
-                for (Prestamo p : cliente.getPrestamosRealizados()) {
+                DetallesPrestamo detallesPrestamo = null;
+                for (DetallesPrestamo p : cliente.getPrestamosRealizados()) {
                     if (p.getProducto() == disco) {
-                        prestamo = p;
+                        detallesPrestamo = p;
                         break;
                     }
                 }
-                if (prestamo != null) {
-                    prestamo.devolver();
-                    cliente.getPrestamosRealizados().remove(prestamo);
+                if (detallesPrestamo != null) {
+                    detallesPrestamo.devolver();
+                    cliente.getPrestamosRealizados().remove(detallesPrestamo);
                     System.out.println("La colección de discos ha sido devuelta por " + cliente.getNombre());
                 }
             } else {
@@ -101,8 +101,8 @@ public class Trabajador {
             System.out.println("No hay préstamos realizados aún.");
         } else {
             System.out.println("\nTODOS LOS PRESTAMOS REALIZADOS");
-            for (Prestamo prestamo : prestamosRealizados) {
-                System.out.println(prestamo);
+            for (DetallesPrestamo detallesPrestamo : prestamosRealizados) {
+                System.out.println(detallesPrestamo);
                 System.out.println("------------------------------");
             }
         }

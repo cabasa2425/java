@@ -4,104 +4,112 @@ import java.time.LocalDate;
 
 /**
  * Representa un préstamo realizado por un cliente en la biblioteca.
- * Contiene información sobre el cliente, el producto prestado y las fechas de préstamo y devolución.
- * Un préstamo se crea con una fecha de inicio y una fecha de devolución prevista de una semana después.
+ * Contiene información sobre el producto prestado, su disponibilidad y las fechas de préstamo y devolución.
  */
-public class Prestamo {
+public abstract class Prestamo implements Prestacion {
 
-    /** Cliente que realiza el préstamo. */
-    private Cliente cliente;
+    /** Título del producto prestado. */
+    protected String titulo;
 
-    /** Producto prestado, que puede ser un libro o un disco. */
-    private Object producto;
+    /** Indica si el producto está disponible para préstamo. */
+    protected boolean disponible;
 
-    /** Fecha en la que se realizó el préstamo. */
-    private LocalDate fechaInicio;
+    /** Fecha en la que se realizó el préstamo, null si aún no se ha prestado. */
+    protected LocalDate fechaPrestamo;
 
-    /** Fecha prevista para la devolución del producto. */
-    private LocalDate fechaDevolucionPrevista;
-
-    /** Fecha real en la que se devolvió el producto, o {@code null} si aún no ha sido devuelto. */
-    private LocalDate fechaDevolucionReal;
+    /** Fecha en la que se devolvió el producto, null si aún no se ha devuelto. */
+    protected LocalDate fechaDevolucion;
 
     /**
-     * Constructor de la clase Prestamo.
-     * Crea un nuevo préstamo con la fecha de inicio actual y una fecha de devolución prevista de una semana.
-     *
-     * @param cliente Cliente que realiza el préstamo.
-     * @param producto Producto prestado (puede ser un libro o un disco).
+     * Constructor de la clase Prestamos.
+     * Inicializa el título y establece el producto como disponible.
+     * @param titulo Título del producto prestado.
      */
-    public Prestamo(Cliente cliente, Object producto) {
-        this.cliente = cliente;
-        this.producto = producto;
-        this.fechaInicio = LocalDate.now();
-        this.fechaDevolucionPrevista = fechaInicio.plusWeeks(1);
-        this.fechaDevolucionReal = null;
+    public Prestamo(String titulo) {
+        this.titulo = titulo;
+        this.disponible = true;
     }
 
     /**
-     * Obtiene el cliente que realizó el préstamo.
-     * @return Cliente que realizó el préstamo.
+     * Intenta prestar el producto si está disponible.
+     * @return {@code true} si el préstamo es exitoso, {@code false} si ya está prestado.
      */
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    /**
-     * Obtiene el producto prestado.
-     * @return Producto prestado (libro o disco).
-     */
-    public Object getProducto() {
-        return producto;
-    }
-
-    /**
-     * Obtiene la fecha de inicio del préstamo.
-     * @return Fecha de inicio del préstamo.
-     */
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
-
-    /**
-     * Obtiene la fecha prevista para la devolución del producto.
-     * @return Fecha prevista de devolución.
-     */
-    public LocalDate getFechaDevolucionPrevista() {
-        return fechaDevolucionPrevista;
-    }
-
-    /**
-     * Obtiene la fecha real de devolución del producto.
-     * @return Fecha de devolución real o {@code null} si aún no ha sido devuelto.
-     */
-    public LocalDate getFechaDevolucionReal() {
-        return fechaDevolucionReal;
-    }
-
-    /**
-     * Marca el producto como devuelto si aún no ha sido devuelto previamente.
-     * Si ya ha sido devuelto, muestra un mensaje indicando que la devolución ya se realizó.
-     */
-    public void devolver() {
-        if (fechaDevolucionReal == null) {
-            fechaDevolucionReal = LocalDate.now();
-            System.out.println("El producto ha sido devuelto.");
-        } else {
-            System.out.println("El producto ya ha sido devuelto anteriormente.");
+    @Override
+    public boolean prestar() {
+        if (disponible) {
+            disponible = false;
+            fechaPrestamo = LocalDate.now();
+            return true;
         }
+        return false;
     }
 
     /**
-     * Representación en cadena del objeto Prestamo.
-     * @return Información del préstamo en formato String.
+     * Devuelve el producto, lo marca como disponible y registra la fecha de devolución.
+     */
+    @Override
+    public void devolver() {
+        disponible = true;
+        fechaDevolucion = LocalDate.now();
+    }
+
+    /**
+     * Verifica si el producto está disponible para préstamo.
+     * @return {@code true} si está disponible, {@code false} si está prestado.
+     */
+    @Override
+    public boolean isDisponible() {
+        return disponible;
+    }
+    public void mostrarInventario(){
+        System.out.println("Mostrar inventario");
+    };
+
+    public void actualizarInventario() {
+        System.out.println("Inventario actualizado");
+    }
+
+    /**
+     * Obtiene la fecha en la que se realizó el préstamo.
+     * @return La fecha de préstamo o {@code null} si aún no ha sido prestado.
+     */
+    public LocalDate getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+    /**
+     * Obtiene la fecha de devolución del producto.
+     * @return La fecha de devolución o {@code null} si aún no ha sido devuelto.
+     */
+    public LocalDate getFechaDevolucion() {
+        return fechaDevolucion;
+    }
+
+    /**
+     * Obtiene el título del producto prestado.
+     * @return El título del producto prestado.
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * Establece un nuevo título para el producto prestado.
+     * @param titulo El nuevo título del producto prestado.
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    /**
+     * Representación en cadena del objeto Prestamos.
+     * @return Información del préstamo en formato de texto.
      */
     @Override
     public String toString() {
-        return "Cliente: " + cliente.getNombre() +
-                "\nProducto: " + producto +
-                "\nFecha de Inicio: " + fechaInicio +
-                "\nFecha de Devolución Prevista: " + fechaDevolucionPrevista +
-                (fechaDevolucionReal != null ? "\nFecha de Devolución Real: " + fechaDevolucionReal : "\nNo devuelto aún");
+        return "Título: " + titulo +
+                "\nDisponible: " + disponible;
+              /*  "\nFecha de Préstamo: " + (fechaPrestamo != null ? fechaPrestamo : "No ha sido prestado") +
+                "\nFecha de Devolución: " + (fechaDevolucion != null ? fechaDevolucion : "No devuelto"); */
     }
 }

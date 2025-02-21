@@ -25,7 +25,7 @@ public abstract class Cliente {
     protected int limitePrestamos;
 
     /** Lista de préstamos realizados por el cliente */
-    protected List<Prestamo> prestamosRealizados;
+    protected List<DetallesPrestamo> prestamosRealizados;
 
     /**
      * Constructor de la clase Cliente.
@@ -110,17 +110,17 @@ public abstract class Cliente {
 
     /**
      * Agrega un préstamo a la lista de préstamos realizados por el cliente.
-     * @param prestamo Préstamo a agregar
+     * @param detallesPrestamo Préstamo a agregar
      */
-    public void agregarPrestamo(Prestamo prestamo) {
-        prestamosRealizados.add(prestamo);
+    public void agregarPrestamo(DetallesPrestamo detallesPrestamo) {
+        prestamosRealizados.add(detallesPrestamo);
     }
 
     /**
      * Obtiene la lista de préstamos realizados por el cliente.
      * @return Lista de préstamos realizados
      */
-    public List<Prestamo> getPrestamosRealizados() {
+    public List<DetallesPrestamo> getPrestamosRealizados() {
         return prestamosRealizados;
     }
 
@@ -132,8 +132,8 @@ public abstract class Cliente {
             System.out.println("❌ No hay préstamos realizados aún.");
         } else {
             System.out.println("\n📚 TODOS LOS PRESTAMOS REALIZADOS 📚");
-            for (Prestamo prestamo : prestamosRealizados) {
-                System.out.println(prestamo);
+            for (DetallesPrestamo detallesPrestamo : prestamosRealizados) {
+                System.out.println(detallesPrestamo);
                 System.out.println("------------------------------");
             }
         }
